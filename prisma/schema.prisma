@@ -9,33 +9,48 @@ datasource db {
 }
 
 model User {
-  id          String       @id @default(uuid())
-  name        String
-  email       String       @unique
-  password    String
-  role        Role         @default(STUDENT)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  submissions Submission[]
+  id             String          @id @default(uuid())
+  name           String
+  email          String          @unique
+  password       String
+  role           Role            @default(STUDENT)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  submissions    Submission[]
+  activityLogs   ActivityLog[]
 
   @@map("users")
 }
 
 model Submission {
-  id          String           @id @default(uuid())
-  projectName String
-  repoUrl     String
-  liveLink    String?
-  description String
-  status      SubmissionStatus @default(PENDING)
-  feedback    String?
-  studentId   String
-  student     User             @relation(fields: [studentId], references: [id], onDelete: Cascade)
-  createdAt   DateTime         @default(now())
-  updatedAt   DateTime         @updatedAt
+  id               String           @id @default(uuid())
+  assignmentNumber Int
+  projectName      String
+  repoUrl          String
+  liveLink         String?
+  description      String
+  status           SubmissionStatus @default(PENDING)
+  feedback         String?
+  edited           Boolean          @default(false)
+  studentId        String
+  student          User             @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
 
-  @@unique([studentId, repoUrl])
+  @@unique([studentId, assignmentNumber])
   @@map("submissions")
+}
+
+model ActivityLog {
+  id           String   @id @default(uuid())
+  mentorId     String
+  mentor       User     @relation(fields: [mentorId], references: [id], onDelete: Cascade)
+  submissionId String
+  action       String // e.g. "APPROVED_SUBMISSION", "REJECTED_SUBMISSION"
+  detail       String?
+  createdAt    DateTime @default(now())
+
+  @@map("activity_logs")
 }
 
 enum Role {

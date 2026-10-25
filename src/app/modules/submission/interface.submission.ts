@@ -1,4 +1,13 @@
 export type TCreateSubmission = {
+  assignmentNumber: number;
+  projectName: string;
+  repoUrl: string;
+  liveLink?: string;
+  description: string;
+};
+
+export type TEditSubmission = {
+  assignmentNumber: number;
   projectName: string;
   repoUrl: string;
   liveLink?: string;
@@ -12,4 +21,6 @@ export type TUpdateSubmissionStatus = {
 
 export type TSubmissionFilters = {
   status?: 'PENDING' | 'APPROVED' | 'REJECTED';
+  assignmentNumber?: number;
+  searchTerm?: string;
 };

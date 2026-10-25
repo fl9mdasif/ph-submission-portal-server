@@ -17,6 +17,7 @@ const demoSubmissions = [
     description:
       'A full-stack e-commerce storefront built with Next.js and Stripe, featuring product search, cart, and checkout.',
     status: 'PENDING',
+    assignmentNumber: 3,
   },
   {
     projectName: 'Task Management App',
@@ -26,6 +27,7 @@ const demoSubmissions = [
       'A Kanban-style task management application with drag-and-drop columns, built using React and Firebase.',
     status: 'APPROVED',
     feedback: 'Clean architecture and great use of optimistic UI updates. Well done!',
+    assignmentNumber: 5,
   },
   {
     projectName: 'Weather Forecast Dashboard',
@@ -34,6 +36,7 @@ const demoSubmissions = [
     description:
       'A weather dashboard that shows 7-day forecasts using the OpenWeather API with city search and saved locations.',
     status: 'PENDING',
+    assignmentNumber: 2,
   },
   {
     projectName: 'Recipe Finder',
@@ -43,6 +46,7 @@ const demoSubmissions = [
       'A recipe search app that lets users find recipes by ingredients they already have at home.',
     status: 'REJECTED',
     feedback: 'Good concept, but the API error states are not handled — please add proper error boundaries and resubmit.',
+    assignmentNumber: 4,
   },
   {
     projectName: 'Personal Finance Tracker',
@@ -52,6 +56,7 @@ const demoSubmissions = [
       'An expense tracking app with charts for spending by category, built with Next.js, Prisma, and Chart.js.',
     status: 'APPROVED',
     feedback: 'Excellent data visualization and clean component structure.',
+    assignmentNumber: 7,
   },
 ];
 
@@ -86,6 +91,7 @@ const demoSubmissions = [
 
     await prisma.submission.create({
       data: {
+        assignmentNumber: sub.assignmentNumber,
         projectName: sub.projectName,
         repoUrl: sub.repoUrl,
         liveLink: sub.liveLink || null,

@@ -2,6 +2,11 @@ import { z } from 'zod';
 
 const createSubmissionSchema = z.object({
   body: z.object({
+    assignmentNumber: z
+      .number({ message: 'Assignment number is required' })
+      .int()
+      .min(1, 'Assignment number must be between 1 and 15')
+      .max(15, 'Assignment number must be between 1 and 15'),
     projectName: z
       .string({ message: 'Project name is required' })
       .trim()
@@ -18,6 +23,8 @@ const createSubmissionSchema = z.object({
   }),
 });
 
+const editSubmissionSchema = createSubmissionSchema;
+
 const updateStatusSchema = z.object({
   body: z.object({
     status: z.enum(['APPROVED', 'REJECTED'], { message: 'Status must be APPROVED or REJECTED' }),
@@ -25,4 +32,8 @@ const updateStatusSchema = z.object({
   }),
 });
 
-export const submissionValidations = { createSubmissionSchema, updateStatusSchema };
+export const submissionValidations = {
+  createSubmissionSchema,
+  editSubmissionSchema,
+  updateStatusSchema,
+};
