@@ -12,6 +12,8 @@ const app: Application = express();
 
 const allowedOrigins = [
   'http://localhost:3000',
+  'https://ph-instructor-client.vercel.app',
+  'ph-instructor-client.vercel.app',
   config.client_url as string,
 ].filter(Boolean);
 
