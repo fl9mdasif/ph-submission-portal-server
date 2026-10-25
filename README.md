@@ -36,6 +36,13 @@ Express 5 + TypeScript + Prisma + PostgreSQL backend for the Project Submission 
    npx prisma migrate dev --name init
    ```
 
+   > If using Supabase/PgBouncer, `DATABASE_URL` should be the **Transaction pooler** (port 6543) and `DIRECT_URL` the **Session pooler** (port 5432) — see `.env.example`. Transaction-mode poolers don't support the advisory locks Prisma Migrate needs, so migrations run via `DIRECT_URL`.
+
+4. (Optional) Seed demo data — 4 students + 5 submissions across all statuses:
+   ```
+   node seed-demo.js
+   ```
+
 4. Start the dev server:
    ```
    npm run dev
